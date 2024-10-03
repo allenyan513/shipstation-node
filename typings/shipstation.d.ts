@@ -2,6 +2,7 @@ import { IAxiosRetryConfig } from 'axios-retry';
 export declare enum RequestMethod {
     GET = "GET",
     POST = "POST",
+    PUT = "PUT",
     DELETE = "DELETE"
 }
 export interface IShipstationRequestOptions {

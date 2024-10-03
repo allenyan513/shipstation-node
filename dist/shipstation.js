@@ -16,6 +16,7 @@ var RequestMethod;
 (function (RequestMethod) {
     RequestMethod["GET"] = "GET";
     RequestMethod["POST"] = "POST";
+    RequestMethod["PUT"] = "PUT";
     RequestMethod["DELETE"] = "DELETE";
 })(RequestMethod || (exports.RequestMethod = RequestMethod = {}));
 var Shipstation = (function () {
@@ -55,6 +56,9 @@ var Shipstation = (function () {
         this.request = stopcock(this.request, rateLimitOpts);
         if (options && options.retry) {
             (0, axios_retry_1.default)(axios_1.default, typeof options.retry === 'boolean' ? undefined : options.retry);
+        }
+        if (options && options.timeout) {
+            this.timeout = options.timeout;
         }
         if (options && options.timeout) {
             this.timeout = options.timeout;
