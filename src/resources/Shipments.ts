@@ -28,4 +28,17 @@ export class Shipments extends BaseResource<IShipment> {
     })
     return response.data as IShippingRate[]
   }
+
+  public async voidLabel(shipmentId:number): Promise<IShippingRate[]> {
+    const url = this.baseUrl + '/voidlabel'
+    const response = await this.shipstation.request({
+      url,
+      method: RequestMethod.POST,
+      data: {
+        shipmentId: shipmentId
+      }
+    })
+    return response.data as IShippingRate[]
+  }
+
 }
