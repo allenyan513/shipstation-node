@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RequestMethod = void 0;
 var axios_1 = __importDefault(require("axios"));
 var axios_retry_1 = __importDefault(require("axios-retry"));
 var base64 = require('base-64');
@@ -16,7 +17,7 @@ var RequestMethod;
     RequestMethod["GET"] = "GET";
     RequestMethod["POST"] = "POST";
     RequestMethod["DELETE"] = "DELETE";
-})(RequestMethod = exports.RequestMethod || (exports.RequestMethod = {}));
+})(RequestMethod || (exports.RequestMethod = RequestMethod = {}));
 var Shipstation = (function () {
     function Shipstation(options) {
         var _this = this;
@@ -25,16 +26,19 @@ var Shipstation = (function () {
             var url = _a.url, _b = _a.method, method = _b === void 0 ? RequestMethod.GET : _b, _c = _a.useBaseUrl, useBaseUrl = _c === void 0 ? true : _c, data = _a.data;
             var opts = {
                 headers: {
-                    Authorization: "Basic " + _this.authorizationToken
+                    Authorization: "Basic ".concat(_this.authorizationToken)
                 },
                 method: method,
-                url: "" + (useBaseUrl ? _this.baseUrl : '') + url
+                url: "".concat(useBaseUrl ? _this.baseUrl : '').concat(url)
             };
-            if (_this.partnerKey) {
+            if (_this.partnerKey && opts && opts.headers) {
                 opts.headers['x-partner'] = _this.partnerKey;
             }
             if (data) {
                 opts.data = data;
+            }
+            if (_this.timeout) {
+                opts.timeout = _this.timeout;
             }
             return axios_1.default.request(opts);
         };
@@ -45,12 +49,15 @@ var Shipstation = (function () {
             options && options.partnerKey
                 ? options.partnerKey : process.env.SS_PARTNER_KEY;
         if (!key || !secret) {
-            throw new Error("APIKey and API Secret are required! Provided API Key: " + key + " API Secret: " + secret);
+            throw new Error("APIKey and API Secret are required! Provided API Key: ".concat(key, " API Secret: ").concat(secret));
         }
-        this.authorizationToken = base64.encode(key + ":" + secret);
+        this.authorizationToken = base64.encode("".concat(key, ":").concat(secret));
         this.request = stopcock(this.request, rateLimitOpts);
         if (options && options.retry) {
-            axios_retry_1.default(axios_1.default, typeof options.retry === 'boolean' ? undefined : options.retry);
+            (0, axios_retry_1.default)(axios_1.default, typeof options.retry === 'boolean' ? undefined : options.retry);
+        }
+        if (options && options.timeout) {
+            this.timeout = options.timeout;
         }
     }
     return Shipstation;

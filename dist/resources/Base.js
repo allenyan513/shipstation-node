@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseResource = void 0;
 var shipstation_1 = require("../shipstation");
 var BaseResource = (function () {
     function BaseResource(shipstation, baseUrl) {
@@ -50,7 +51,7 @@ var BaseResource = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = this.baseUrl + "/" + id;
+                        url = "".concat(this.baseUrl, "/").concat(id);
                         return [4, this.shipstation.request({
                                 url: url,
                                 method: shipstation_1.RequestMethod.GET
@@ -68,7 +69,7 @@ var BaseResource = (function () {
             Object.entries(params).forEach(function (_a, index) {
                 var key = _a[0], value = _a[1];
                 var qsStart = index === 0 ? "?" : "&";
-                qs += "" + qsStart + key + "=" + value;
+                qs += "".concat(qsStart).concat(key, "=").concat(value);
             });
         }
         return qs;

@@ -89,7 +89,7 @@ export default class Shipstation {
       url: `${useBaseUrl ? this.baseUrl : ''}${url}`
     }
 
-    if (this.partnerKey) {
+    if (this.partnerKey && opts && opts.headers) {
       opts.headers['x-partner'] = this.partnerKey
     }
 
