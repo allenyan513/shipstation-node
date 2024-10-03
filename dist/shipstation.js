@@ -15,6 +15,7 @@ var RequestMethod;
 (function (RequestMethod) {
     RequestMethod["GET"] = "GET";
     RequestMethod["POST"] = "POST";
+    RequestMethod["PUT"] = "PUT";
     RequestMethod["DELETE"] = "DELETE";
 })(RequestMethod = exports.RequestMethod || (exports.RequestMethod = {}));
 var Shipstation = (function () {
@@ -36,6 +37,9 @@ var Shipstation = (function () {
             if (data) {
                 opts.data = data;
             }
+            if (_this.timeout) {
+                opts.timeout = _this.timeout;
+            }
             return axios_1.default.request(opts);
         };
         var key = options && options.apiKey ? options.apiKey : process.env.SS_API_KEY;
@@ -51,6 +55,9 @@ var Shipstation = (function () {
         this.request = stopcock(this.request, rateLimitOpts);
         if (options && options.retry) {
             axios_retry_1.default(axios_1.default, typeof options.retry === 'boolean' ? undefined : options.retry);
+        }
+        if (options && options.timeout) {
+            this.timeout = options.timeout;
         }
     }
     return Shipstation;
