@@ -86,7 +86,7 @@ var Warehouses = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = this.baseUrl + "/createwarehouse";
+                        url = "".concat(this.baseUrl, "/createwarehouse");
                         return [4, this.shipstation.request({
                                 url: url,
                                 method: shipstation_1.RequestMethod.POST,
@@ -105,7 +105,7 @@ var Warehouses = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = this.baseUrl + "/" + id;
+                        url = "".concat(this.baseUrl, "/").concat(id);
                         return [4, this.shipstation.request({
                                 url: url,
                                 method: shipstation_1.RequestMethod.PUT,
@@ -124,7 +124,7 @@ var Warehouses = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = this.baseUrl + "/" + id;
+                        url = "".concat(this.baseUrl, "/").concat(id);
                         return [4, this.shipstation.request({
                                 url: url,
                                 method: shipstation_1.RequestMethod.DELETE,

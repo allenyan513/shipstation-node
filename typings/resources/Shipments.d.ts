@@ -6,4 +6,5 @@ export declare class Shipments extends BaseResource<IShipment> {
     constructor(shipstation: Shipstation);
     getAll(opts?: object): Promise<IShipment[]>;
     getRates(data?: IShippingRateOptions): Promise<IShippingRate[]>;
+    voidLabel(shipmentId: number): Promise<IShippingRate[]>;
 }

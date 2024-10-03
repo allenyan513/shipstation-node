@@ -60,9 +60,6 @@ var Shipstation = (function () {
         if (options && options.timeout) {
             this.timeout = options.timeout;
         }
-        if (options && options.timeout) {
-            this.timeout = options.timeout;
-        }
     }
     return Shipstation;
 }());

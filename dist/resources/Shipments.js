@@ -99,6 +99,27 @@ var Shipments = (function (_super) {
             });
         });
     };
+    Shipments.prototype.voidLabel = function (shipmentId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        url = this.baseUrl + '/voidlabel';
+                        return [4, this.shipstation.request({
+                                url: url,
+                                method: shipstation_1.RequestMethod.POST,
+                                data: {
+                                    shipmentId: shipmentId
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
     return Shipments;
 }(Base_1.BaseResource));
 exports.Shipments = Shipments;
