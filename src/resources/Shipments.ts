@@ -1,6 +1,6 @@
-import { IShipment, IShippingRate, IShippingRateOptions } from '../models'
-import Shipstation, { RequestMethod } from '../shipstation'
-import { BaseResource } from './Base'
+import {IShipment, IShippingRate, IShippingRateOptions} from '../models'
+import Shipstation, {RequestMethod} from '../shipstation'
+import {BaseResource} from './Base'
 
 export class Shipments extends BaseResource<IShipment> {
   constructor(protected shipstation: Shipstation) {
@@ -29,7 +29,7 @@ export class Shipments extends BaseResource<IShipment> {
     return response.data as IShippingRate[]
   }
 
-  public async voidLabel(shipmentId:number): Promise<IShippingRate[]> {
+  public async voidLabel(shipmentId: number): Promise<{ shipmentId: string }> {
     const url = this.baseUrl + '/voidlabel'
     const response = await this.shipstation.request({
       url,
@@ -38,7 +38,7 @@ export class Shipments extends BaseResource<IShipment> {
         shipmentId: shipmentId
       }
     })
-    return response.data as IShippingRate[]
+    return response.data
   }
 
 }
